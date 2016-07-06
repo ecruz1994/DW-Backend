@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block content %}
+
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Chaquetas de pluma</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Chaquetas</a></li>
+            <li class="active">Chaquetas de pluma</li>
+          </ol>
+        </div>
+      </div>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">Filtros</div>
+            <div class="panel-body">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="">
+                  Hombre
+                </label>
+                <br>
+                <label>
+                  <input type="checkbox" value="">
+                  Mujer
+                </label>
+                <br>             
+                <label>
+                  <input type="checkbox" value="">
+                  Niños
+                </label>
+                <br>
+                <label>
+                  <input type="checkbox" value="">
+                  Niñas
+                </label>
+              </div>
+              <a href="#" class="btn btn-default pull-right">Filtrar</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+              {% for product in products %}
+              <div class="col-sm-4">
+                  <div class="col-item">
+                      <div class="photo">
+                          {% thumbnail product.image "350x260" crop="center" as im %}
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{product.name}}" >
+                          {% endthumbnail %}                          
+                      </div>
+                      <div class="info">
+                          <div class="row">
+                              <div class="price col-md-6">
+                                  <h5>{{product.name}}</h5>
+                                  <h5 class="price-text-color">{{product.price}}</h5>
+                              </div>
+                              <div class="rating hidden-sm col-md-6">
+                                  <i class="price-text-color fa fa-star"></i>
+                                  <i class="price-text-color fa fa-star"></i>
+                                  <i class="price-text-color fa fa-star"></i>
+                                  <i class="price-text-color fa fa-star"></i>
+                                  <i class="fa fa-star"></i>
+                              </div>
+                          </div>
+                          <div class="separator clear-left">
+                              <p class="btn-add">
+                                  <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Agregar</a></p>
+                              <p class="btn-details">
+                                  <i class="fa fa-list"></i><a href="#" class="hidden-sm">Cotizar</a></p>
+                          </div>
+                          <div class="clearfix">     </div>
+                      </div>
+                  </div>
+              </div>  
+              {% endfor %} 
+            </div>
+
+        </div>
+      </div>
+{% endblock content %}
