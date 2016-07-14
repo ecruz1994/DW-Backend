@@ -4,35 +4,72 @@
 {% block content %}
 
     <div class="container">
-      <div class="jumbotron">
-        <h1>Marketing stuff!</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+        {% for banner in banners %}
+         {% if banner.id = 1 %}
+          <li data-target="#myCarousel" data-slide-to= "{{banner.id}}" class="Active"></li>
+         {% endif %}
+         {% if banner.id != 1 %}
+         <li data-target="#myCarousel" data-slide-to= "{{banner.id}}"></li>
+         {% endif %}
+        {% endfor %}
+          </ol>
+        <!-- Wrapper for slides -->
+       
+        <div class="carousel-inner" role="listbox">
+        {% for banner in banners %}
+        {% if banner.id = 1 %}
+        {% thumbnail banner.image "1150x480" crop="center" as im %}
+        <div class="item active">
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{banner.name}}" >
+          <div class="carousel-caption">
+                  <h3>{{banner.name}}</h3>
+                  <p>{{banner.description}}</p>
+          </div>
+        </div>
+        {% endthumbnail %}
+        {% endif %}
+        {% if banner.id != 1 %}
+        {% thumbnail banner.image "1150x480" crop="center" as im %}
+            <div class="item">
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{banner.name}}" >
+              <div class="carousel-caption">
+                      <h3>{{banner.name}}</h3>
+              </div>
+            </div>
+        {% endthumbnail %}
+        {% endif %}
+        {% endfor %}
+        </div> 
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
 
       <!-- Example row of columns -->
       <div class="row">
+      {% for product in products %}
         <div class="col-lg-4">
-          <h2>Safari bug warning!</h2>
-          <p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <h2>{{product.name}}</h2>
+          {% thumbnail product.image "1150x480" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{product.name}}" >
+          {% endthumbnail %}
+          <p class="text-danger">{{product.description}}</p>
           <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
         </div>
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-        </div>
+      {% endfor %}
       </div>
 
       <!-- Site footer -->
       <footer class="footer">
-        <p>&copy; 2015 Company, Inc.</p>
       </footer>
 
     </div> <!-- /container -->

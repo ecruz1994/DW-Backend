@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name','sku','price','brand','category','status','created_at','updated_at')    
 
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('name','created_at','updated_at')
+    list_display = ('name','status','sort_order','created_at','updated_at')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)

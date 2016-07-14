@@ -41,5 +41,7 @@ class Product(models.Model):
 class Banner(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/data',blank=True,null=False)
+    sort_order = models.IntegerField(default=0)
+    status = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
