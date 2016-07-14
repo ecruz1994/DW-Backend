@@ -6,7 +6,10 @@
 
       <div class="row">
         <div class="col-md-12">
-          <h1>Chaquetas de pluma</h1>
+         {% thumbnail category.banner "1200x200" crop="center" as im %}
+          <img style="margin-top:-40px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{category.name}}" >
+          <h1 style="margin-top:-50px; color:#fff;">{{category.name}}</h1>
+         {% endthumbnail %}
         </div>
       </div>
       <div class="row">
@@ -24,27 +27,16 @@
             <div class="panel-heading">Filtros</div>
             <div class="panel-body">
               <div class="checkbox">
+              <h4>Marcas</h4>
+              {% for brand in brands %}
                 <label>
-                  <input type="checkbox" value="">
-                  Hombre
+                  <input type="checkbox" name ="filters" value="{{brand}}">
+                 {{ brand.name }}
                 </label>
                 <br>
-                <label>
-                  <input type="checkbox" value="">
-                  Mujer
-                </label>
-                <br>             
-                <label>
-                  <input type="checkbox" value="">
-                  Niños
-                </label>
-                <br>
-                <label>
-                  <input type="checkbox" value="">
-                  Niñas
-                </label>
+              {% endfor %}
+              <input type="submit" name="submit" class="btn btn-default pull-right" value="Filtrar" >
               </div>
-              <a href="#" class="btn btn-default pull-right">Filtrar</a>
             </div>
           </div>
 
